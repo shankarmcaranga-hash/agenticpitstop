@@ -11,20 +11,21 @@ phases:
 
   pre_build:
     commands:
+      - echo Current Directory
       - pwd
-      - ls -R
       - cd AgenticPITSTOP
       - dotnet restore AgenticPitstop.sln
 
   build:
     commands:
-      - dotnet build AgenticPitstop.sln --configuration Release
+      - dotnet build AgenticPitstop.sln --configuration Release --no-restore
 
   post_build:
     commands:
       - mkdir -p reports
 
       - dotnet test AgenticPitstop.Tests/AgenticPitstop.Tests.csproj \
+        --configuration Release \
         --logger "trx;LogFileName=UnitTestResults.trx" \
         --results-directory reports
 
@@ -32,9 +33,9 @@ phases:
         --collect:"XPlat Code Coverage"
 
       - reportgenerator \
-        -reports:**/coverage.cobertura.xml \
-        -targetdir:reports/CoverageReport \
-        -reporttypes:Html
+        "-reports:**/coverage.cobertura.xml" \
+        "-targetdir:reports/CoverageReport" \
+        "-reporttypes:Html"
 
 artifacts:
   files:
