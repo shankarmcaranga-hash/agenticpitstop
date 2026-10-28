@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  variables:
+    DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+
 phases:
   install:
     runtime-versions:
@@ -10,23 +14,17 @@ phases:
 
   pre_build:
     commands:
-      - echo "Current Directory"
       - pwd
-      - echo "Listing Files"
-      - find . -maxdepth 2 -not -path '*/.git*'
-      - cd AgenticPITSTOP
-      - ls -la
-      - dotnet --info
-      - dotnet restore AgenticPitstop.sln --verbosity normal
+      - find . -maxdepth 3 \( -name "*.sln" -o -name "*.csproj" \) -not -path '*/.git*'
+      - export SLN_PATH=$(find . -maxdepth 3 -name "*.sln" | head -n 1)
+      - echo "Using solution $SLN_PATH"
+      - test -n "$SLN_PATH"
+      - dotnet restore "$SLN_PATH" --verbosity normal
 
   build:
     commands:
-      - dotnet build AgenticPitstop.sln --configuration Release --no-restore
-      - dotnet test AgenticPitstop.Tests/AgenticPitstop.Tests.csproj --configuration Release --no-build --logger "trx;LogFileName=results.trx" --results-directory "$CODEBUILD_SRC_DIR/TestResults"
-
-  post_build:
-    commands:
-      - dotnet publish AgenticPitstop.sln --configuration Release --no-build --output "$CODEBUILD_SRC_DIR/publish"
+      - dotnet build "$SLN_PATH" --configuration Release --no-restore
+      - dotnet test "$SLN_PATH" --configuration Release --no-build --logger "trx;LogFileName=results.trx" --results-directory "$CODEBUILD_SRC_DIR/TestResults"
 
 reports:
   test-results:
@@ -38,4 +36,3 @@ reports:
 artifacts:
   files:
     - '**/*'
-  base-directory: publish
