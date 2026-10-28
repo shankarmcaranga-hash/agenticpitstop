@@ -3,82 +3,81 @@
 env:
   variables:
     DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+    DOTNET_NOLOGO: "1"
+    BUILD_CONFIGURATION: "Release"
 
 phases:
-
   install:
     runtime-versions:
       dotnet: 8.0
     commands:
-      - echo "Installing ReportGenerator..."
       - dotnet tool install -g dotnet-reportgenerator-globaltool
       - export PATH="$PATH:$HOME/.dotnet/tools"
 
   pre_build:
     commands:
-      - echo "Locating solution file..."
       - pwd
       - find . -maxdepth 3 \( -name "*.sln" -o -name "*.csproj" \) -not -path '*/.git*'
-
+      # Solution (first .sln found)
       - export SLN_PATH=$(find . -maxdepth 3 -name "*.sln" | head -n 1)
-
-      - echo "Using solution: $SLN_PATH"
-
+      - echo "Solution $SLN_PATH"
       - test -n "$SLN_PATH"
-
+      # Web project = the csproj that uses the Web SDK (excludes test projects)
+      - export APP_PROJECT=$(grep -rl --include=*.csproj 'Microsoft.NET.Sdk.Web' . | grep -vi 'test' | head -n 1)
+      - echo "Web project $APP_PROJECT"
+      - test -n "$APP_PROJECT"
       - dotnet restore "$SLN_PATH"
 
   build:
     commands:
-      - echo "Building solution..."
-      - dotnet build "$SLN_PATH" --configuration Release --no-restore
-
-      - echo "Running unit tests with code coverage..."
-      - dotnet test "$SLN_PATH" \
-        --configuration Release \
-        --no-build \
-        --collect:"XPlat Code Coverage" \
-        --logger "trx;LogFileName=results.trx" \
+      - dotnet build "$SLN_PATH" --configuration $BUILD_CONFIGURATION --no-restore
+      - >
+        dotnet test "$SLN_PATH"
+        --configuration $BUILD_CONFIGURATION
+        --no-build
+        --logger "trx;LogFileName=results.trx"
+        --collect:"XPlat Code Coverage"
         --results-directory "$CODEBUILD_SRC_DIR/TestResults"
 
-      - echo "Searching for coverage file..."
-      - find "$CODEBUILD_SRC_DIR/TestResults" -name "coverage.cobertura.xml"
-
-      - echo "Generating HTML Coverage Report..."
-      - reportgenerator \
-        -reports:"$CODEBUILD_SRC_DIR/TestResults/**/coverage.cobertura.xml" \
-        -targetdir:"$CODEBUILD_SRC_DIR/CoverageReport" \
-        -reporttypes:Html
-
-      - echo "Publishing ASP.NET Core application..."
-
-      - export PROJECT_PATH=$(find . -name "*.csproj" | grep -v Tests | head -n 1)
-
-      - echo "Publishing project: $PROJECT_PATH"
-
-      - dotnet publish "$PROJECT_PATH" \
-        -c Release \
-        -o publish \
-        --no-build
+  post_build:
+    commands:
+      # Coverage report (HTML + Cobertura)
+      - >
+        reportgenerator
+        -reports:"$CODEBUILD_SRC_DIR/TestResults/**/coverage.cobertura.xml"
+        -targetdir:"$CODEBUILD_SRC_DIR/CoverageReport"
+        -reporttypes:"Html;Cobertura;TextSummary"
+      - cat "$CODEBUILD_SRC_DIR/CoverageReport/Summary.txt"
+      # Publish the MVC app only
+      - mkdir -p "$CODEBUILD_SRC_DIR/artifacts-out/app"
+      - >
+        dotnet publish "$APP_PROJECT"
+        --configuration $BUILD_CONFIGURATION
+        --no-restore
+        --output "$CODEBUILD_SRC_DIR/artifacts-out/app"
+      # CodeDeploy files must be at the artifact root
+      - cp "$CODEBUILD_SRC_DIR/appspec.yml" "$CODEBUILD_SRC_DIR/artifacts-out/"
+      - cp -r "$CODEBUILD_SRC_DIR/scripts" "$CODEBUILD_SRC_DIR/artifacts-out/scripts"
+      - cp -r "$CODEBUILD_SRC_DIR/CoverageReport" "$CODEBUILD_SRC_DIR/artifacts-out/coverage-html"
+      - ls -R "$CODEBUILD_SRC_DIR/artifacts-out" | head -n 60
 
 reports:
-
   test-results:
     files:
       - '**/*.trx'
     base-directory: TestResults
     file-format: VisualStudioTrx
-
   code-coverage:
     files:
-      - '**/coverage.cobertura.xml'
-    base-directory: TestResults
-    file-format: COBERTURAXML
+      - 'Cobertura.xml'
+    base-directory: CoverageReport
+    file-format: CoberturaXml
 
 artifacts:
   files:
     - '**/*'
-  base-directory: .
+  base-directory: artifacts-out
+  name: agenticpitstop-build
 
 cache:
   paths:
