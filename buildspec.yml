@@ -13,6 +13,8 @@ phases:
     commands:
       - echo Current Directory
       - pwd
+      - ls -la
+      - find . -name "*.sln"
       - cd AgenticPITSTOP
       - dotnet restore AgenticPITSTOP.sln
 
