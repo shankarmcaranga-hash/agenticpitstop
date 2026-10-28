@@ -1,10 +1,20 @@
-﻿#!/bin/bash
+#!/bin/bash
+set -e
+cat > /etc/systemd/system/agenticpitstop.service <<'EOF'
+[Unit]
+Description=Agentic Pitstop
+After=network.target
 
-echo "===== Starting Application ====="
+[Service]
+WorkingDirectory=/var/www/agenticpitstop
+ExecStart=/usr/bin/dotnet /var/www/agenticpitstop/AgenticPitstop.dll
+Restart=always
+Environment=ASPNETCORE_URLS=http://0.0.0.0:5000
+Environment=ASPNETCORE_ENVIRONMENT=Production
 
-cd /var/www/pitstop
-
-nohup dotnet AgenticPitstop.Web.dll \
-> application.log 2>&1 &
-
-echo "Application Started Successfully"
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable agenticpitstop
+systemctl restart agenticpitstop
