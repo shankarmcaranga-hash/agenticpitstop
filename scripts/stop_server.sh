@@ -1,3 +1,5 @@
 #!/bin/bash
-systemctl stop agenticpitstop 2>/dev/null || true
+if systemctl list-unit-files | grep -q '^agenticpitstop.service'; then
+  systemctl stop agenticpitstop || true
+fi
 exit 0
