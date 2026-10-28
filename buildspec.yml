@@ -1,39 +1,39 @@
-﻿version: 0.2
+version: 0.2
 
 phases:
-
   install:
     runtime-versions:
       dotnet: 8.0
-
     commands:
       - echo Installing tools
-      - dotnet tool install --global dotnet-reportgenerator-globaltool
+      - dotnet tool install -g dotnet-reportgenerator-globaltool
+      - export PATH="$PATH:/root/.dotnet/tools"
 
   pre_build:
     commands:
-      - dotnet restore
+      - pwd
+      - ls -R
+      - cd AgenticPITSTOP
+      - dotnet restore AgenticPitstop.sln
 
   build:
     commands:
-    - cd AgenticPITSTOP
-    - dotnet restore AgenticPitstop.sln
+      - dotnet build AgenticPitstop.sln --configuration Release
 
   post_build:
     commands:
-
       - mkdir -p reports
 
-      - dotnet test
-        --logger trx
+      - dotnet test AgenticPitstop.Tests/AgenticPitstop.Tests.csproj \
+        --logger "trx;LogFileName=UnitTestResults.trx" \
         --results-directory reports
 
-      - dotnet test
+      - dotnet test AgenticPitstop.Tests/AgenticPitstop.Tests.csproj \
         --collect:"XPlat Code Coverage"
 
-      - reportgenerator
-        -reports:**/coverage.cobertura.xml
-        -targetdir:reports/CoverageReport
+      - reportgenerator \
+        -reports:**/coverage.cobertura.xml \
+        -targetdir:reports/CoverageReport \
         -reporttypes:Html
 
 artifacts:
