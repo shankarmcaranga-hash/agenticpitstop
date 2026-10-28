@@ -9,51 +9,30 @@ phases:
     runtime-versions:
       dotnet: 8.0
     commands:
-      - echo "Installing ReportGenerator"
-      - dotnet tool install -g dotnet-reportgenerator-globaltool || true
-      - export PATH="$PATH:/root/.dotnet/tools"
+      - dotnet tool install -g dotnet-reportgenerator-globaltool
+      - export PATH="$PATH:$HOME/.dotnet/tools"
 
   pre_build:
     commands:
-      - echo "Locating solution file"
       - pwd
-      - find . -maxdepth 3 \( -name "*.sln" -o -name "*.csproj" \) -not -path '*/.git/*'
+      - find . -maxdepth 3 \( -name "*.sln" -o -name "*.csproj" \) -not -path '*/.git*'
       - export SLN_PATH=$(find . -maxdepth 3 -name "*.sln" | head -n 1)
-      - echo "Using solution: $SLN_PATH"
+      - echo "Using solution $SLN_PATH"
       - test -n "$SLN_PATH"
-      - dotnet restore "$SLN_PATH"
+      - dotnet restore "$SLN_PATH" --verbosity normal
 
   build:
     commands:
-      - echo "Building solution"
       - dotnet build "$SLN_PATH" --configuration Release --no-restore
-      - echo "Running tests with code coverage"
-      - dotnet test "$SLN_PATH" --configuration Release --no-build --collect:"XPlat Code Coverage" --logger "trx;LogFileName=results.trx" --results-directory "$CODEBUILD_SRC_DIR/TestResults"
-      - echo "Finding coverage files"
-      - find "$CODEBUILD_SRC_DIR/TestResults" -name "coverage.cobertura.xml"
-      - echo "Generating HTML coverage report"
-      - reportgenerator -reports:"$CODEBUILD_SRC_DIR/TestResults/**/coverage.cobertura.xml" -targetdir:"$CODEBUILD_SRC_DIR/CoverageReport" -reporttypes:Html
-      - export PROJECT_PATH=$(find . -name "*.csproj" | grep -v Tests | head -n 1)
-      - echo "Publishing project: $PROJECT_PATH"
-      - dotnet publish "$PROJECT_PATH" -c Release -o publish --no-build
+      - dotnet test "$SLN_PATH" --configuration Release --no-build --logger "trx;LogFileName=results.trx" --results-directory "$CODEBUILD_SRC_DIR/TestResults"
 
 reports:
   test-results:
     files:
-      - '**/*.trx'
+      - 'results.trx'
     base-directory: TestResults
     file-format: VisualStudioTrx
-
-  code-coverage:
-    files:
-      - '**/coverage.cobertura.xml'
-    base-directory: TestResults
-    file-format: COBERTURAXML
 
 artifacts:
   files:
     - '**/*'
-
-cache:
-  paths:
-    - '/root/.nuget/packages/**/*'
