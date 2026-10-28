@@ -14,11 +14,11 @@ phases:
       - echo Current Directory
       - pwd
       - cd AgenticPITSTOP
-      - dotnet restore AgenticPitstop.sln
+      - dotnet restore AgenticPITSTOP.sln
 
   build:
     commands:
-      - dotnet build AgenticPitstop.sln --configuration Release --no-restore
+      - dotnet build AgenticPITSTOP.sln --configuration Release --no-restore
 
   post_build:
     commands:
