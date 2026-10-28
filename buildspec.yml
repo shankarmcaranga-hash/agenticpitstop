@@ -8,10 +8,16 @@ phases:
       - dotnet tool install -g dotnet-reportgenerator-globaltool
       - export PATH="$PATH:/root/.dotnet/tools"
 
-  pre_build:
-    commands:
-      - cd AgenticPITSTOP
-      - dotnet restore AgenticPitstop.sln
+    pre_build:
+      commands:
+        - echo "Current Directory"
+        - pwd
+        - echo "Listing Files"
+        - find .
+        - cd AgenticPITSTOP
+        - ls -la
+        - dotnet --info
+        - dotnet restore AgenticPitstop.sln --verbosity normal
 
   build:
     commands:
