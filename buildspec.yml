@@ -3,6 +3,7 @@ version: 0.2
 env:
   variables:
     DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+    DOTNET_NOLOGO: "1"
 
 phases:
   install:
@@ -19,20 +20,51 @@ phases:
       - export SLN_PATH=$(find . -maxdepth 3 -name "*.sln" | head -n 1)
       - echo "Using solution $SLN_PATH"
       - test -n "$SLN_PATH"
+      - dotnet --info
       - dotnet restore "$SLN_PATH" --verbosity normal
 
   build:
     commands:
       - dotnet build "$SLN_PATH" --configuration Release --no-restore
-      - dotnet test "$SLN_PATH" --configuration Release --no-build --logger "trx;LogFileName=results.trx" --results-directory "$CODEBUILD_SRC_DIR/TestResults"
+      - >
+        dotnet test "$SLN_PATH"
+        --configuration Release
+        --no-build
+        --logger "trx;LogFileName=results.trx"
+        --collect:"XPlat Code Coverage"
+        --results-directory "$CODEBUILD_SRC_DIR/TestResults"
+
+  post_build:
+    commands:
+      # Merge coverage from all test projects into one Cobertura file + HTML report
+      - >
+        reportgenerator
+        -reports:"$CODEBUILD_SRC_DIR/TestResults/**/coverage.cobertura.xml"
+        -targetdir:"$CODEBUILD_SRC_DIR/CoverageReport"
+        -reporttypes:"Html;Cobertura;TextSummary"
+      - cat "$CODEBUILD_SRC_DIR/CoverageReport/Summary.txt"
+      # Publish and collect everything into one artifact folder
+      - dotnet publish "$SLN_PATH" --configuration Release --no-build --output "$CODEBUILD_SRC_DIR/publish"
+      - mkdir -p "$CODEBUILD_SRC_DIR/artifacts-out"
+      - cp -r "$CODEBUILD_SRC_DIR/publish" "$CODEBUILD_SRC_DIR/artifacts-out/publish"
+      - cp -r "$CODEBUILD_SRC_DIR/CoverageReport" "$CODEBUILD_SRC_DIR/artifacts-out/coverage-html"
+      - cp -r "$CODEBUILD_SRC_DIR/TestResults" "$CODEBUILD_SRC_DIR/artifacts-out/test-results"
 
 reports:
   test-results:
     files:
-      - 'results.trx'
+      - '**/*.trx'
     base-directory: TestResults
     file-format: VisualStudioTrx
+
+  code-coverage:
+    files:
+      - 'Cobertura.xml'
+    base-directory: CoverageReport
+    file-format: CoberturaXml
 
 artifacts:
   files:
     - '**/*'
+  base-directory: artifacts-out
+  name: build-output
