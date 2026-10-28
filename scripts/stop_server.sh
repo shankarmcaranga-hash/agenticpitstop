@@ -1,14 +1,3 @@
-﻿#!/bin/bash
-
-echo "===== Stopping Existing Application ====="
-
-PID=$(pgrep -f AgenticPitstop.Web.dll)
-
-if [ ! -z "$PID" ]; then
-    echo "Killing process $PID"
-    sudo kill -9 $PID
-else
-    echo "No running application found"
-fi
-
-echo "===== Application Stopped ====="
+#!/bin/bash
+systemctl stop agenticpitstop 2>/dev/null || true
+exit 0
