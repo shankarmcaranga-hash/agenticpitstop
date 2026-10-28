@@ -1,40 +1,85 @@
 ﻿version: 0.2
 
+env:
+  variables:
+    DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+
 phases:
 
   install:
     runtime-versions:
       dotnet: 8.0
-
     commands:
-      - echo Installing tools
-      - dotnet tool install --global dotnet-reportgenerator-globaltool
+      - echo "Installing ReportGenerator..."
+      - dotnet tool install -g dotnet-reportgenerator-globaltool
+      - export PATH="$PATH:$HOME/.dotnet/tools"
 
   pre_build:
     commands:
-      - dotnet restore
+      - echo "Locating solution file..."
+      - pwd
+      - find . -maxdepth 3 \( -name "*.sln" -o -name "*.csproj" \) -not -path '*/.git*'
+
+      - export SLN_PATH=$(find . -maxdepth 3 -name "*.sln" | head -n 1)
+
+      - echo "Using solution: $SLN_PATH"
+
+      - test -n "$SLN_PATH"
+
+      - dotnet restore "$SLN_PATH"
 
   build:
     commands:
-      - dotnet build
+      - echo "Building solution..."
+      - dotnet build "$SLN_PATH" --configuration Release --no-restore
 
-  post_build:
-    commands:
+      - echo "Running unit tests with code coverage..."
+      - dotnet test "$SLN_PATH" \
+        --configuration Release \
+        --no-build \
+        --collect:"XPlat Code Coverage" \
+        --logger "trx;LogFileName=results.trx" \
+        --results-directory "$CODEBUILD_SRC_DIR/TestResults"
 
-      - mkdir -p reports
+      - echo "Searching for coverage file..."
+      - find "$CODEBUILD_SRC_DIR/TestResults" -name "coverage.cobertura.xml"
 
-      - dotnet test
-        --logger trx
-        --results-directory reports
-
-      - dotnet test
-        --collect:"XPlat Code Coverage"
-
-      - reportgenerator
-        -reports:**/coverage.cobertura.xml
-        -targetdir:reports/CoverageReport
+      - echo "Generating HTML Coverage Report..."
+      - reportgenerator \
+        -reports:"$CODEBUILD_SRC_DIR/TestResults/**/coverage.cobertura.xml" \
+        -targetdir:"$CODEBUILD_SRC_DIR/CoverageReport" \
         -reporttypes:Html
+
+      - echo "Publishing ASP.NET Core application..."
+
+      - export PROJECT_PATH=$(find . -name "*.csproj" | grep -v Tests | head -n 1)
+
+      - echo "Publishing project: $PROJECT_PATH"
+
+      - dotnet publish "$PROJECT_PATH" \
+        -c Release \
+        -o publish \
+        --no-build
+
+reports:
+
+  test-results:
+    files:
+      - '**/*.trx'
+    base-directory: TestResults
+    file-format: VisualStudioTrx
+
+  code-coverage:
+    files:
+      - '**/coverage.cobertura.xml'
+    base-directory: TestResults
+    file-format: COBERTURAXML
 
 artifacts:
   files:
     - '**/*'
+  base-directory: .
+
+cache:
+  paths:
+    - '/root/.nuget/packages/**/*'
