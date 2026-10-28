@@ -1,0 +1,23 @@
+﻿# Visual Studio
+.vs/
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# Test Results
+TestResults/
+
+# Coverage Reports
+CoverageReport/
+
+# Logs
+*.log
+
+# Publish Output
+publish/
+
+# NuGet
+packages/

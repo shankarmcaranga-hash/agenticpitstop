@@ -1,0 +1,1026 @@
+﻿/* ===========================================================================
+   Inbox detail: overrides for a full-width, consistent look.
+   Loaded after config-workspace.css, so these rules win.
+   =========================================================================== */
+
+/* --- header ------------------------------------------------------------- */
+.dv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 18px 22px;
+}
+
+.dv-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+    .dv-back:hover {
+        color: var(--brand);
+    }
+
+.dv-title-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 10px 0 0;
+}
+
+.dv-title-icon {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--brand-soft);
+    color: var(--brand);
+    font-size: 20px;
+}
+
+.dv-title {
+    margin: 0;
+    font-size: 20px;
+}
+
+.dv-title-meta {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.dv-header-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.dv-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* --- tiles: share the full row equally, whatever their number ------------ */
+.dv-tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 16px 0;
+}
+
+    .dv-tiles .dl-tile {
+        flex: 1 1 0;
+        min-width: 200px;
+        align-items: center;
+        padding: 16px 18px;
+        border-radius: 12px;
+        box-shadow: var(--shadow-sm);
+        transition: transform .12s ease, box-shadow .12s ease;
+    }
+
+        .dv-tiles .dl-tile:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+    .dv-tiles .dl-tile-icon {
+        flex: 0 0 42px;
+        height: 42px;
+        border-radius: 10px;
+        font-size: 18px;
+    }
+
+    .dv-tiles .dl-tile-label {
+        font-size: 12px;
+    }
+
+    .dv-tiles .dl-tile-value {
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .dv-tiles .dl-tile-sub {
+        font-size: 12px;
+    }
+
+.dv-tiles-inline {
+    margin: 0;
+}
+
+/* --- workspace: tabs and panels ------------------------------------------ */
+.dv-workspace {
+    padding: 0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.dv-tabs {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0 18px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+}
+
+    .dv-tabs .dv-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 12px;
+        margin-bottom: -1px;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        border-radius: 0;
+        background: none;
+        box-shadow: none;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+        cursor: pointer;
+    }
+
+        .dv-tabs .dv-tab:hover {
+            color: var(--text);
+        }
+
+        .dv-tabs .dv-tab.active {
+            color: var(--brand);
+            border-bottom-color: var(--brand);
+            background: none;
+        }
+
+.dv-panel {
+    padding: 18px;
+    min-height: 300px;
+}
+
+.dv-loading {
+    min-height: 260px;
+}
+
+/* --- empty state ----------------------------------------------------------- */
+.dv-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 260px;
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+    .dv-empty strong {
+        font-size: 15px;
+        color: var(--text);
+    }
+
+.dv-empty-icon {
+    width: 56px;
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+    border-radius: 14px;
+    background: var(--brand-soft);
+    color: var(--brand);
+    font-size: 24px;
+}
+
+@media (max-width: 900px) {
+    .dv-header-side {
+        align-items: flex-start;
+    }
+
+    .dv-tiles .dl-tile {
+        flex-basis: calc(50% - 7px);
+    }
+}
+
+@media (max-width: 560px) {
+    .dv-tiles .dl-tile {
+        flex-basis: 100%;
+    }
+}
+
+/* --- document viewer: toolbar, paging, zoom, pinned summary -------------- */
+.dv-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-2);
+}
+
+.dv-toolbar-file {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    font-size: 13px;
+}
+
+    .dv-toolbar-file strong {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 260px;
+    }
+
+.dv-pager-nav, .dv-zoom {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dv-page-label {
+    min-width: 104px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.dv-zoom-value {
+    min-width: 58px;
+}
+
+.dv-doc-body.is-flex {
+    display: flex;
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+
+.dv-fields {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.dv-kv-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+}
+
+.dv-kv-empty {
+    padding: 20px 8px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.dv-summary {
+    flex: 0 0 auto;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    border-radius: 8px;
+    background: var(--brand-soft);
+}
+
+.dv-summary-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--brand);
+}
+
+.dv-summary p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+/* --- checklist with evidence --------------------------------------------- */
+.dv-qs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dv-q {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    overflow: hidden;
+}
+
+    .dv-q > header {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+    }
+
+        .dv-q > header > div {
+            flex: 1;
+            min-width: 0;
+        }
+
+    .dv-q header strong {
+        display: block;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .dv-q header small {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 2px;
+    }
+
+.dv-q-num {
+    flex: 0 0 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--surface-3);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.dv-ev-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    padding: 12px 14px;
+}
+
+.dv-ev {
+    padding: 9px 11px;
+    border-radius: 8px;
+    background: var(--surface-2);
+}
+
+    .dv-ev span {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .dv-ev p {
+        margin: 3px 0 0;
+        font-size: 12px;
+        line-height: 1.5;
+        word-break: break-word;
+    }
+
+.dv-why {
+    display: flex;
+    gap: 9px;
+    padding: 11px 14px;
+    background: var(--brand-soft);
+    border-top: 1px solid var(--line);
+}
+
+    .dv-why i {
+        margin-top: 2px;
+        color: var(--brand);
+    }
+
+    .dv-why p {
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+/* --- notes ---------------------------------------------------------------- */
+.dv-notes-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.dv-notes-toggle {
+    display: inline-flex;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.dv-note-tab {
+    padding: 7px 14px;
+    border: 0;
+    background: var(--surface);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+    .dv-note-tab.active {
+        background: var(--brand);
+        color: #fff;
+    }
+
+.dv-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 560px;
+    overflow: auto;
+}
+
+.dv-note {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    border-radius: 8px;
+    background: var(--surface);
+}
+
+    .dv-note > header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px;
+        padding: 9px 12px;
+        border-bottom: 1px solid var(--line);
+        font-size: 12px;
+    }
+
+    .dv-note header span {
+        color: var(--muted);
+        font-size: 11px;
+    }
+
+    .dv-note p {
+        margin: 0;
+        padding: 11px 12px;
+        font-size: 12px;
+        line-height: 1.6;
+        white-space: pre-wrap;
+    }
+
+.dl-pv-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dl-pv-note {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    border-radius: 8px;
+    background: var(--surface);
+}
+
+.dl-pv-note-head {
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--line);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.dl-pv-note-body {
+    padding: 10px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.dl-feed + .dl-feed {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+}
+
+/* --- rendered pages ------------------------------------------------------ */
+.dv-canvas-wrap {
+    position: relative;
+    max-height: 620px;
+    overflow: auto;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-2);
+}
+
+    .dv-canvas-wrap.is-loading::after {
+        content: "Loading…";
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, .7);
+        font-size: 12px;
+        color: var(--muted);
+    }
+
+[data-theme="dark"] .dv-canvas-wrap.is-loading::after {
+    background: rgba(15, 23, 42, .7);
+}
+
+.dv-canvas {
+    max-width: 100%;
+    box-shadow: var(--shadow-sm);
+    background: #fff;
+}
+
+/* --- popup --------------------------------------------------------------- */
+.dv-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    background: rgba(15, 23, 42, .55);
+    backdrop-filter: blur(4px);
+}
+
+.dv-modal-card {
+    display: flex;
+    flex-direction: column;
+    width: min(1500px, 100%);
+    height: 100%;
+    border-radius: 14px;
+    background: var(--surface);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.dv-modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+}
+
+.dv-modal-body {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 14px;
+    padding: 14px 18px 18px;
+}
+
+.dv-modal-page {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+    .dv-modal-page .dv-canvas-wrap {
+        flex: 1;
+        max-height: none;
+    }
+
+.dv-modal-fields {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* --- editing one value ----------------------------------------------------- */
+.dv-kv td {
+    position: relative;
+}
+
+.dv-kv-edit {
+    opacity: 0;
+    margin-left: 8px;
+    padding: 2px 6px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 10px;
+    cursor: pointer;
+    transition: opacity .12s ease;
+}
+
+    .dv-kv tr:hover .dv-kv-edit, .dv-kv-edit:focus {
+        opacity: 1;
+    }
+
+    .dv-kv-edit:hover {
+        border-color: var(--brand);
+        color: var(--brand);
+    }
+
+.dv-kv-edit-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.dv-kv-input {
+    flex: 1;
+    min-width: 0;
+    font-size: 12px;
+}
+
+@media (max-width: 1100px) {
+    .dv-modal-body {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 1fr) 250px;
+    }
+}
+/* Summary cards live inside a tab panel, not the page header, so they must
+   shrink to the panel rather than to their content. */
+.dv-tiles-inline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+    .dv-tiles-inline .dl-tile {
+        min-width: 0;
+    }
+
+    .dv-tiles-inline .dl-tile-text,
+    .dv-tiles-inline .dl-tile-label,
+    .dv-tiles-inline .dl-tile-value {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+.dv-panel {
+    overflow-x: hidden;
+}
+
+/* 1fr has a min-content floor, so a wide table widens its own column.
+   minmax(0, 1fr) lets the track shrink and the content wrap instead. */
+.dv-doc {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+.dv-doc-sec {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.dv-doc-body,
+.dv-fields,
+.dv-kv-scroll {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.dv-kv {
+    table-layout: fixed;
+    width: 100%;
+}
+
+    .dv-kv th,
+    .dv-kv td {
+        overflow-wrap: anywhere;
+    }
+
+.dv-summary {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+}
+
+    .dv-summary p {
+        margin: 0;
+        overflow-wrap: anywhere;
+    }
+/* ===========================================================================
+   Case review - tiles, tabs and the data grid
+
+   Layout and finish only. Every class below already exists in Detail.cshtml;
+   nothing here is scoped wider than the detail screen, so the Configuration
+   preview that shares .dl-tile is untouched.
+   =========================================================================== */
+
+/* --- header --------------------------------------------------------------- */
+.dv-header {
+    padding: 18px 20px;
+    margin-bottom: 16px;
+}
+
+.dv-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 14px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+    .dv-back:hover {
+        color: var(--brand);
+    }
+
+.dv-title-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+    font-size: 18px;
+}
+
+.dv-title h1 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: -.02em;
+}
+
+.dv-actions {
+    gap: 8px;
+}
+
+    .dv-actions .btn {
+        min-height: 40px;
+        padding: 9px 18px;
+    }
+
+/* --- tiles ---------------------------------------------------------------- */
+.dv-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+    /* One accent token per tile drives both the top rule and the icon chip, so a
+   tile reads as one object rather than a box with a coloured line on it. */
+    .dv-tiles .dl-tile {
+        --tile-accent: var(--brand);
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px 16px 15px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+        transition: box-shadow .15s ease, transform .15s ease;
+    }
+
+        .dv-tiles .dl-tile::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 3px;
+            background: var(--tile-accent);
+        }
+
+        .dv-tiles .dl-tile:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-1px);
+        }
+
+    .dv-tiles .dl-accent-navy {
+        --tile-accent: #1e3a8a;
+    }
+
+    .dv-tiles .dl-accent-teal {
+        --tile-accent: #0e9488;
+    }
+
+    .dv-tiles .dl-accent-sky {
+        --tile-accent: #0284c7;
+    }
+
+    .dv-tiles .dl-accent-green {
+        --tile-accent: #15803d;
+    }
+
+    .dv-tiles .dl-accent-gold {
+        --tile-accent: #b45309;
+    }
+
+    .dv-tiles .dl-accent-slate {
+        --tile-accent: #475569;
+    }
+
+    .dv-tiles .dl-tile-icon {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--tile-accent) 12%, transparent);
+        color: var(--tile-accent);
+        font-size: 13px;
+    }
+
+    .dv-tiles .dl-tile-text {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .dv-tiles .dl-tile-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .dv-tiles .dl-tile-value {
+        margin-top: 5px;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: -.015em;
+        line-height: 1.3;
+        overflow-wrap: anywhere;
+    }
+
+    .dv-tiles .dl-tile-sub {
+        margin-top: 4px;
+        font-size: 11px;
+        color: var(--muted);
+    }
+
+/* --- workspace and tabs --------------------------------------------------- */
+.dv-workspace {
+    overflow: hidden;
+}
+
+.tabs.dv-tabs {
+    gap: 2px;
+    margin: 0;
+    padding: 0 14px;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    background: var(--surface-2);
+}
+
+.dv-tabs .dv-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 12px 16px;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+    .dv-tabs .dv-tab:hover {
+        color: var(--text);
+        background: transparent;
+    }
+
+    /* The active tab owns the panel beneath it, so it joins to it rather than
+       sitting on a tinted pill of its own. */
+    .dv-tabs .dv-tab.active {
+        background: var(--surface);
+        color: var(--brand);
+        border-bottom-color: var(--brand);
+    }
+
+/* --- panel and grid ------------------------------------------------------- */
+.dv-panel {
+    padding: 16px;
+}
+
+    .dv-panel .table-wrap {
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        overflow: auto;
+        max-height: 460px;
+    }
+
+    .dv-panel table {
+        min-width: 100%;
+    }
+
+    .dv-panel thead th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        padding: 12px 14px;
+        background: var(--surface-2);
+        box-shadow: inset 0 -1px 0 var(--line);
+        white-space: nowrap;
+    }
+
+    .dv-panel tbody td {
+        padding: 12px 14px;
+        font-size: 12px;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+    }
+
+    .dv-panel tbody tr:nth-child(even) {
+        background: color-mix(in srgb, var(--surface-2) 55%, transparent);
+    }
+
+    .dv-panel tbody tr:hover {
+        background: var(--brand-soft);
+    }
+
+    .dv-panel tbody tr:last-child td {
+        border-bottom: 0;
+    }
+
+    /* A single row left a tall band of empty card below it. */
+    .dv-panel tbody td[colspan] {
+        padding: 34px 14px;
+        text-align: center;
+        color: var(--muted);
+    }
+
+/* --- pager ---------------------------------------------------------------- */
+.dv-pager {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 11px;
+}
+
+    .dv-pager .btn {
+        min-height: 30px;
+        padding: 5px 12px;
+    }
+
+.dv-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 48px 16px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+    .dv-loading i {
+        animation: dv-spin 1s linear infinite;
+    }
+
+@keyframes dv-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 760px) {
+    .dv-tiles {
+        grid-template-columns: 1fr;
+    }
+
+    .tabs.dv-tabs {
+        padding: 0 8px;
+    }
+
+    .dv-panel {
+        padding: 12px;
+    }
+}

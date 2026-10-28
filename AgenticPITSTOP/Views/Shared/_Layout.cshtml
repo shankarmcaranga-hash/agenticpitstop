@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AgenticPITSTOP</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AgenticPITSTOP.styles.css" asp-append-version="true" />
+</head>
+<body>
+    @* SVG icons sprite available to all partials *@
+    @await Html.PartialAsync("_Icons")
+    @* Reusable header partial *@
+    @await Html.PartialAsync("_Header")
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-12 col-md-3 col-lg-2 bg-light sidebar py-4">
+                @await Html.PartialAsync("_Sidebar")
+            </nav>
+
+            <main role="main" class="col-12 col-md-9 col-lg-10 px-4 py-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    @* Reusable footer partial *@
+    @await Html.PartialAsync("_Footer")
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        // Theme toggle: persist in localStorage and toggle body class
+        (function(){
+            const toggle = document.getElementById('themeToggle');
+            if(!toggle) return;
+            const setTheme = (dark)=>{
+                if(dark) document.body.classList.add('dark-mode'); else document.body.classList.remove('dark-mode');
+                localStorage.setItem('themeDark', dark? '1':'0');
+            };
+            const saved = localStorage.getItem('themeDark');
+            if(saved==='1') toggle.checked = true, setTheme(true);
+            toggle.addEventListener('change', ()=> setTheme(toggle.checked) );
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <!-- Targets .NET 8 (LTS). To move to .NET 10 change this single value;
+         nothing in the project uses an API that was removed after 8. -->
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>AgenticPitstop</RootNamespace>
+    <AssemblyName>AgenticPitstop</AssemblyName>
+    <UserSecretsId>agentic-pitstop-portal</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AgenticPitstop.Tests\**" />
+    <Content Remove="AgenticPitstop.Tests\**" />
+    <EmbeddedResource Remove="AgenticPitstop.Tests\**" />
+    <None Remove="AgenticPitstop.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\net8.0\AgenticPitstop.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net8.0\AgenticPitstop.GlobalUsings.g.cs" />
+    <Compile Include="obj\Debug\net8.0\AgenticPitstop.RazorAssemblyInfo.cs" />
+    <Compile Include="obj\Release\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Release\net8.0\AgenticPitstop.AssemblyInfo.cs" />
+    <Compile Include="obj\Release\net8.0\AgenticPitstop.GlobalUsings.g.cs" />
+    <Compile Include="obj\Release\net8.0\AgenticPitstop.RazorAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net8.0\AgenticPitstop.deps.json" />
+    <Content Include="bin\Debug\net8.0\AgenticPitstop.runtimeconfig.json" />
+    <Content Include="bin\Debug\net8.0\AgenticPitstop.staticwebassets.endpoints.json" />
+    <Content Include="bin\Debug\net8.0\AgenticPitstop.staticwebassets.runtime.json" />
+    <Content Include="bin\Debug\net8.0\appsettings.Development.json" />
+    <Content Include="bin\Debug\net8.0\appsettings.json" />
+    <Content Include="bin\Debug\net8.0\appsettingsDev.json" />
+    <Content Include="bin\Debug\net8.0\wwwroot\lib\fontawesome\css\fontawesome.min.css" />
+    <Content Include="bin\Debug\net8.0\wwwroot\lib\fontawesome\css\solid.min.css" />
+    <Content Include="bin\Debug\net8.0\wwwroot\lib\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="bin\Release\net8.0\AgenticPitstop.deps.json" />
+    <Content Include="bin\Release\net8.0\AgenticPitstop.runtimeconfig.json" />
+    <Content Include="bin\Release\net8.0\AgenticPitstop.staticwebassets.endpoints.json" />
+    <Content Include="bin\Release\net8.0\AgenticPitstop.staticwebassets.runtime.json" />
+    <Content Include="bin\Release\net8.0\appsettings.Development.json" />
+    <Content Include="bin\Release\net8.0\appsettings.json" />
+    <Content Include="bin\Release\net8.0\appsettingsDev.json" />
+    <Content Include="bin\Release\net8.0\wwwroot\lib\fontawesome\css\fontawesome.min.css" />
+    <Content Include="bin\Release\net8.0\wwwroot\lib\fontawesome\css\solid.min.css" />
+    <Content Include="bin\Release\net8.0\wwwroot\lib\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="obj\AgenticPitstop.csproj.nuget.dgspec.json" />
+    <Content Include="obj\Debug\net8.0\AgenticPitstop.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\net8.0\ApiEndpoints.json" />
+    <Content Include="obj\Debug\net8.0\AppSettingsSchema.json" />
+    <Content Include="obj\Debug\net8.0\CombinedComponentSchema.json" />
+    <Content Include="obj\Debug\net8.0\rjimswa.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\rjsmcshtml.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\rjsmrazor.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\rpswa.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.build.endpoints.json" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.build.json" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.development.json" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.references.upToDateCheck.txt" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.removed.txt" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.upToDateCheck.txt" />
+    <Content Include="obj\project.assets.json" />
+    <Content Include="obj\Release\net8.0\AgenticPitstop.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\net8.0\AppSettingsSchema.json" />
+    <Content Include="obj\Release\net8.0\CombinedComponentSchema.json" />
+    <Content Include="obj\Release\net8.0\PublishOutputs.5f8bead9db.txt" />
+    <Content Include="obj\Release\net8.0\PublishOutputs.df8a870b44.txt" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\AgenticPitstop.deps.json" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\AgenticPitstop.runtimeconfig.json" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\AgenticPitstop.staticwebassets.endpoints.json" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\appsettings.Development.json" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\appsettings.json" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\appsettingsDev.json" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\css\apiconfig.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\css\config-workspace.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\css\configuration.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\css\detail.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\css\inbox.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\css\inflow-versioning.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\css\inflow.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\css\pipeline.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\css\preview.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\css\site.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\css\sopanalyzer.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\lib\fontawesome\css\fontawesome.min.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\lib\fontawesome\css\solid.min.css" />
+    <Content Include="obj\Release\net8.0\PubTmp\Out\wwwroot\lib\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="obj\Release\net8.0\rjimswa.dswa.cache.json" />
+    <Content Include="obj\Release\net8.0\rjsmcshtml.dswa.cache.json" />
+    <Content Include="obj\Release\net8.0\rjsmrazor.dswa.cache.json" />
+    <Content Include="obj\Release\net8.0\rpswa.dswa.cache.json" />
+    <Content Include="obj\Release\net8.0\staticwebassets.build.endpoints.json" />
+    <Content Include="obj\Release\net8.0\staticwebassets.build.json" />
+    <Content Include="obj\Release\net8.0\staticwebassets.development.json" />
+    <Content Include="obj\Release\net8.0\staticwebassets.publish.endpoints.json" />
+    <Content Include="obj\Release\net8.0\staticwebassets.publish.json" />
+    <Content Include="obj\Release\net8.0\staticwebassets.references.upToDateCheck.txt" />
+    <Content Include="obj\Release\net8.0\staticwebassets.removed.txt" />
+    <Content Include="obj\Release\net8.0\staticwebassets.upToDateCheck.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- ADO.NET only. No Entity Framework, no ORM, no micro-ORM. -->
+	  <PackageReference Include="AWSSDK.KeyManagementService" Version="4.0.100.17" />
+	  <PackageReference Include="AWSSDK.S3" Version="4.0.104.7" />
+	  <PackageReference Include="AWSSDK.SecretsManager" Version="4.0.100.18" />
+	  <PackageReference Include="AWSSDK.SQS" Version="4.0.100.13" />
+	  <PackageReference Include="Azure.Identity" Version="1.21.0" />
+	  <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.11.2" />
+	  <PackageReference Include="coverlet.collector" Version="10.1.0">
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	    <PrivateAssets>all</PrivateAssets>
+	  </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="8.0.33" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.33" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+	<PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+	 <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+	 <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.11" />
+	 <PackageReference Include="xunit" Version="2.9.3" />
+	 <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1">
+	   <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	   <PrivateAssets>all</PrivateAssets>
+	 </PackageReference>
+    <!-- Windows Authentication when hosted on Kestrel. IIS/IIS Express uses
+         its own handler and ignores this. Replace with an SSO handler later. -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\lib\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="App_Data\Documents\Collections\" />
+    <Folder Include="Models\" />
+    <Folder Include="obj\Debug\net8.0\staticwebassets\" />
+    <Folder Include="obj\Release\net8.0\staticwebassets\" />
+    <Folder Include="Views\SopAnalyzer\" />
+    <Folder Include="wwwroot\Documents\Collections\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0\AgenticPitstop.dll" />
+    <None Include="bin\Debug\net8.0\AgenticPitstop.exe" />
+    <None Include="bin\Debug\net8.0\AgenticPitstop.pdb" />
+    <None Include="bin\Debug\net8.0\AWSSDK.Core.dll" />
+    <None Include="bin\Debug\net8.0\AWSSDK.KeyManagementService.dll" />
+    <None Include="bin\Debug\net8.0\AWSSDK.S3.dll" />
+    <None Include="bin\Debug\net8.0\AWSSDK.SecretsManager.dll" />
+    <None Include="bin\Debug\net8.0\AWSSDK.SQS.dll" />
+    <None Include="bin\Debug\net8.0\Azure.Core.dll" />
+    <None Include="bin\Debug\net8.0\Azure.Identity.dll" />
+    <None Include="bin\Debug\net8.0\Azure.Security.KeyVault.Secrets.dll" />
+    <None Include="bin\Debug\net8.0\de\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Debug\net8.0\es\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Debug\net8.0\fr\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Debug\net8.0\it\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Debug\net8.0\ja\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Debug\net8.0\ko\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Negotiate.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Data.SqlClient.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Features.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Options.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Identity.Client.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.SqlServer.Server.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll" />
+    <None Include="bin\Debug\net8.0\pt-BR\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\linux\lib\net8.0\System.DirectoryServices.Protocols.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\osx\lib\net8.0\System.DirectoryServices.Protocols.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win\lib\net8.0\System.DirectoryServices.Protocols.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Runtime.Caching.dll" />
+    <None Include="bin\Debug\net8.0\ru\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Debug\net8.0\System.ClientModel.dll" />
+    <None Include="bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll" />
+    <None Include="bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll" />
+    <None Include="bin\Debug\net8.0\System.DirectoryServices.Protocols.dll" />
+    <None Include="bin\Debug\net8.0\System.Drawing.Common.dll" />
+    <None Include="bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll" />
+    <None Include="bin\Debug\net8.0\System.IO.Pipelines.dll" />
+    <None Include="bin\Debug\net8.0\System.Memory.Data.dll" />
+    <None Include="bin\Debug\net8.0\System.Runtime.Caching.dll" />
+    <None Include="bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll" />
+    <None Include="bin\Debug\net8.0\System.Text.Encodings.Web.dll" />
+    <None Include="bin\Debug\net8.0\System.Text.Json.dll" />
+    <None Include="bin\Debug\net8.0\web.config" />
+    <None Include="bin\Debug\net8.0\wwwroot\lib\fontawesome\webfonts\fa-solid-900.woff2" />
+    <None Include="bin\Debug\net8.0\wwwroot\lib\jquery\jquery.min.js" />
+    <None Include="bin\Debug\net8.0\wwwroot\lib\pdfjs\pdf.min.js" />
+    <None Include="bin\Debug\net8.0\wwwroot\lib\pdfjs\pdf.worker.min.js" />
+    <None Include="bin\Debug\net8.0\wwwroot\lib\tiffjs\tiff.min.js" />
+    <None Include="bin\Debug\net8.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Debug\net8.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Release\net8.0\AgenticPitstop.dll" />
+    <None Include="bin\Release\net8.0\AgenticPitstop.exe" />
+    <None Include="bin\Release\net8.0\AgenticPitstop.pdb" />
+    <None Include="bin\Release\net8.0\AWSSDK.Core.dll" />
+    <None Include="bin\Release\net8.0\AWSSDK.KeyManagementService.dll" />
+    <None Include="bin\Release\net8.0\AWSSDK.S3.dll" />
+    <None Include="bin\Release\net8.0\AWSSDK.SecretsManager.dll" />
+    <None Include="bin\Release\net8.0\AWSSDK.SQS.dll" />
+    <None Include="bin\Release\net8.0\Azure.Core.dll" />
+    <None Include="bin\Release\net8.0\Azure.Identity.dll" />
+    <None Include="bin\Release\net8.0\Azure.Security.KeyVault.Secrets.dll" />
+    <None Include="bin\Release\net8.0\de\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Release\net8.0\es\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Release\net8.0\fr\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Release\net8.0\it\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Release\net8.0\ja\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Release\net8.0\ko\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.AspNetCore.Authentication.Negotiate.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Data.SqlClient.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Extensions.Caching.Memory.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Extensions.Features.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Extensions.Logging.Abstractions.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Extensions.Options.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Extensions.Primitives.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Identity.Client.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.IdentityModel.Abstractions.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.IdentityModel.Logging.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.IdentityModel.Protocols.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.IdentityModel.Tokens.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.SqlServer.Server.dll" />
+    <None Include="bin\Release\net8.0\Microsoft.Win32.SystemEvents.dll" />
+    <None Include="bin\Release\net8.0\pt-BR\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Release\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll" />
+    <None Include="bin\Release\net8.0\runtimes\linux\lib\net8.0\System.DirectoryServices.Protocols.dll" />
+    <None Include="bin\Release\net8.0\runtimes\osx\lib\net8.0\System.DirectoryServices.Protocols.dll" />
+    <None Include="bin\Release\net8.0\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll" />
+    <None Include="bin\Release\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Release\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Release\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Release\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Release\net8.0\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll" />
+    <None Include="bin\Release\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll" />
+    <None Include="bin\Release\net8.0\runtimes\win\lib\net8.0\System.DirectoryServices.Protocols.dll" />
+    <None Include="bin\Release\net8.0\runtimes\win\lib\net8.0\System.Runtime.Caching.dll" />
+    <None Include="bin\Release\net8.0\ru\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Release\net8.0\System.ClientModel.dll" />
+    <None Include="bin\Release\net8.0\System.Configuration.ConfigurationManager.dll" />
+    <None Include="bin\Release\net8.0\System.Diagnostics.DiagnosticSource.dll" />
+    <None Include="bin\Release\net8.0\System.DirectoryServices.Protocols.dll" />
+    <None Include="bin\Release\net8.0\System.Drawing.Common.dll" />
+    <None Include="bin\Release\net8.0\System.IdentityModel.Tokens.Jwt.dll" />
+    <None Include="bin\Release\net8.0\System.IO.Pipelines.dll" />
+    <None Include="bin\Release\net8.0\System.Memory.Data.dll" />
+    <None Include="bin\Release\net8.0\System.Runtime.Caching.dll" />
+    <None Include="bin\Release\net8.0\System.Security.Cryptography.ProtectedData.dll" />
+    <None Include="bin\Release\net8.0\System.Text.Encodings.Web.dll" />
+    <None Include="bin\Release\net8.0\System.Text.Json.dll" />
+    <None Include="bin\Release\net8.0\web.config" />
+    <None Include="bin\Release\net8.0\wwwroot\lib\fontawesome\webfonts\fa-solid-900.woff2" />
+    <None Include="bin\Release\net8.0\wwwroot\lib\jquery\jquery.min.js" />
+    <None Include="bin\Release\net8.0\wwwroot\lib\pdfjs\pdf.min.js" />
+    <None Include="bin\Release\net8.0\wwwroot\lib\pdfjs\pdf.worker.min.js" />
+    <None Include="bin\Release\net8.0\wwwroot\lib\tiffjs\tiff.min.js" />
+    <None Include="bin\Release\net8.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="bin\Release\net8.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="obj\AgenticPitstop.csproj.nuget.g.props" />
+    <None Include="obj\AgenticPitstop.csproj.nuget.g.targets" />
+    <None Include="obj\Debug\net8.0\AgenticP.BEA71D39.Up2Date" />
+    <None Include="obj\Debug\net8.0\AgenticPitstop.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net8.0\AgenticPitstop.assets.cache" />
+    <None Include="obj\Debug\net8.0\AgenticPitstop.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\net8.0\AgenticPitstop.csproj.BuildWithSkipAnalyzers" />
+    <None Include="obj\Debug\net8.0\AgenticPitstop.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\net8.0\AgenticPitstop.dll" />
+    <None Include="obj\Debug\net8.0\AgenticPitstop.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net8.0\AgenticPitstop.genruntimeconfig.cache" />
+    <None Include="obj\Debug\net8.0\AgenticPitstop.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="obj\Debug\net8.0\AgenticPitstop.pdb" />
+    <None Include="obj\Debug\net8.0\AgenticPitstop.RazorAssemblyInfo.cache" />
+    <None Include="obj\Debug\net8.0\apphost.exe" />
+    <None Include="obj\Debug\net8.0\refint\AgenticPitstop.dll" />
+    <None Include="obj\Debug\net8.0\ref\AgenticPitstop.dll" />
+    <None Include="obj\Debug\net8.0\staticwebassets.build.json.cache" />
+    <None Include="obj\project.nuget.cache" />
+    <None Include="obj\Release\net8.0\AgenticP.BEA71D39.Up2Date" />
+    <None Include="obj\Release\net8.0\AgenticPitstop.AssemblyInfoInputs.cache" />
+    <None Include="obj\Release\net8.0\AgenticPitstop.assets.cache" />
+    <None Include="obj\Release\net8.0\AgenticPitstop.csproj.AssemblyReference.cache" />
+    <None Include="obj\Release\net8.0\AgenticPitstop.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Release\net8.0\AgenticPitstop.dll" />
+    <None Include="obj\Release\net8.0\AgenticPitstop.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Release\net8.0\AgenticPitstop.genruntimeconfig.cache" />
+    <None Include="obj\Release\net8.0\AgenticPitstop.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="obj\Release\net8.0\AgenticPitstop.pdb" />
+    <None Include="obj\Release\net8.0\AgenticPitstop.RazorAssemblyInfo.cache" />
+    <None Include="obj\Release\net8.0\apphost.exe" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\AgenticPitstop.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\AgenticPitstop.exe" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\AgenticPitstop.pdb" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\AWSSDK.Core.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\AWSSDK.KeyManagementService.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\AWSSDK.S3.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\AWSSDK.SecretsManager.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\AWSSDK.SQS.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Azure.Core.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Azure.Identity.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Azure.Security.KeyVault.Secrets.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\de\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\es\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\fr\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\it\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\ja\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\ko\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.Negotiate.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Connections.Abstractions.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Data.SqlClient.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Caching.Memory.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Configuration.Abstractions.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Diagnostics.Abstractions.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Features.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.FileProviders.Abstractions.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Hosting.Abstractions.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Logging.Abstractions.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Options.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Primitives.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Identity.Client.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Identity.Client.Extensions.Msal.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Abstractions.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Logging.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.SqlServer.Server.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\pt-BR\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\linux\lib\net8.0\System.DirectoryServices.Protocols.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\osx\lib\net8.0\System.DirectoryServices.Protocols.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net8.0\System.DirectoryServices.Protocols.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net8.0\System.Runtime.Caching.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\ru\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.ClientModel.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.Diagnostics.DiagnosticSource.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.DirectoryServices.Protocols.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.Drawing.Common.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.IO.Pipelines.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.Memory.Data.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.Runtime.Caching.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.Text.Encodings.Web.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\System.Text.Json.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\web.config" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Archive\useCase-11\20261013\100042-ExcelUploading_06Aug26.xlsx" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CAA - Examine\CAA-EXAMINE\_\0ad64a73-d43b-4203-9b5d-30a154e476c1.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\158\06011867-83be-4d7a-88df-e064e25d93dd.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\159\0b79d3f8-e421-4a06-b038-7e1fa05e878a.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\164\1684f160-1df3-44d6-8401-301fd23985a8.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\166\1756f0d6-be3d-4eba-9b1a-685239184be4.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\167\17725eef-9c95-4eed-8509-97a9cb64f930.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\168\1ca4c92a-3b36-47f2-a0eb-d590bf0158cc.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\170\238163b8-eb47-4957-9416-00486fb91856.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\174\345a35c4-c9e7-4d13-a9dd-6952c151d0e6.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\177\399dd5e2-0c06-44c4-913e-b30cb92c07c3.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\178\3a7f9652-80af-445b-931b-de047b2b1bee.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\188\75989ba8-fc3b-4588-9bed-2a1742cfd03e.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\190\88e1b2db-2634-499b-be5f-83b50a466c90.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\191\8bf1fc01-8009-432c-bfa0-1260e3d69d84.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\192\93a101bb-e94a-4ab8-9f48-e819f90b17de.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\193\9808a546-0363-4ad9-be0f-0494e79d696c.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\197\ac2556be-3281-4148-8dea-7d67063c94d0.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\199\b2bbf492-cc9e-4269-8106-add882f25f10.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\Documents\Collections\CWA - Examine\CWA-EXAMINE\200\b3ddf00e-5141-4f5f-b9c1-c70e1a15de8b.PDF" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\js\apiconfig.js" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\js\aps.core.js" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\js\doc-viewer.js" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\js\pipeline.js" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\js\source-builder.js" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\lib\fontawesome\webfonts\fa-solid-900.woff2" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\lib\jquery\jquery.min.js" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\lib\pdfjs\pdf.min.js" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\lib\pdfjs\pdf.worker.min.js" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\wwwroot\lib\tiffjs\tiff.min.js" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\zh-Hans\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="obj\Release\net8.0\PubTmp\Out\zh-Hant\Microsoft.Data.SqlClient.resources.dll" />
+    <None Include="obj\Release\net8.0\refint\AgenticPitstop.dll" />
+    <None Include="obj\Release\net8.0\ref\AgenticPitstop.dll" />
+    <None Include="obj\Release\net8.0\staticwebassets.build.json.cache" />
+  </ItemGroup>
+
+</Project>

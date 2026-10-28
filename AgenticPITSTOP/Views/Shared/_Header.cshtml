@@ -1,0 +1,62 @@
+@* Reusable header for AgenticPITSTOP *@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container-fluid px-3">
+            <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/images/dice-pit-stop.png" alt="DICE PIT STOP" class="header-logo-img" onerror="this.style.display='none'" />
+                <div class="d-flex flex-column ms-2">
+                    <span class="brand-title">AGENTIC PIT STOP</span>
+                    @* <small class="text-muted">MetLife [UAT]</small> *@
+                </div>
+            </a>
+
+            <div class="d-flex align-items-center ms-3 header-title-block">
+                <form class="d-none d-md-flex align-items-center search-input" role="search">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0" id="search-addon">
+                            <svg width="16" height="16" aria-hidden="true"><use href="#icon-search"></use></svg>
+                        </span>
+                        <input class="form-control form-control-sm border-start-0" type="search" placeholder="Search by Tran ID / Group # / Legal Name" aria-label="Search" aria-describedby="search-addon">
+                    </div>
+                </form>
+                <button class="btn btn-light btn-sm rounded-circle upload-btn" title="Upload">
+                    <svg width="18" height="18" aria-hidden="true"><use href="#icon-upload"></use></svg>
+                </button>
+
+                <button class="btn btn-sm btn-outline-secondary" title="Notifications">
+                    <svg class="me-1" width="18" height="18" aria-hidden="true"><use href="#icon-bell"></use></svg>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" title="Filters">
+                    <svg class="me-1" width="18" height="18" aria-hidden="true"><use href="#icon-settings"></use></svg>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" title="Messages">
+                    <svg class="me-1" width="18" height="18" aria-hidden="true"><use href="#icon-mail"></use></svg>
+                </button>
+
+                <button class="btn btn-sm pit-options-btn" title="Pit Options">
+                    <img src="~/images/pit-options.png" alt="Pit Options" class="header-action-img" onerror="this.style.display='none'" />
+                    <span class="d-none d-md-inline ms-1">Pit Options</span>
+                </button>
+                @* <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        KK
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div> *@
+                <div class="mb-0 ms-auto header-user">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center" style="width:40px;height:40px;">
+                            <svg width="20" height="20" aria-hidden="true"><use href="#icon-user"></use></svg>
+                        </div>
+                        <div class="ms-2">                           
+                            <div class="text-muted small">Reviewer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

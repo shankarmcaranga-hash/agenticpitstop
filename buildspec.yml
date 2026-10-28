@@ -1,0 +1,40 @@
+﻿version: 0.2
+
+phases:
+
+  install:
+    runtime-versions:
+      dotnet: 8.0
+
+    commands:
+      - echo Installing tools
+      - dotnet tool install --global dotnet-reportgenerator-globaltool
+
+  pre_build:
+    commands:
+      - dotnet restore
+
+  build:
+    commands:
+      - dotnet build
+
+  post_build:
+    commands:
+
+      - mkdir -p reports
+
+      - dotnet test
+        --logger trx
+        --results-directory reports
+
+      - dotnet test
+        --collect:"XPlat Code Coverage"
+
+      - reportgenerator
+        -reports:**/coverage.cobertura.xml
+        -targetdir:reports/CoverageReport
+        -reporttypes:Html
+
+artifacts:
+  files:
+    - '**/*'
