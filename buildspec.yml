@@ -16,7 +16,8 @@ phases:
 
   build:
     commands:
-      - dotnet build
+    - cd AgenticPITSTOP
+    - dotnet restore AgenticPitstop.sln
 
   post_build:
     commands:
