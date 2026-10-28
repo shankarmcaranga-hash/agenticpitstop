@@ -8,7 +8,7 @@ phases:
       - dotnet tool install -g dotnet-reportgenerator-globaltool
       - export PATH="$PATH:/root/.dotnet/tools"
 
-    pre_build:
+  pre_build:
       commands:
         - echo "Current Directory"
         - pwd
