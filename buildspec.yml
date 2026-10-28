@@ -6,27 +6,36 @@ phases:
       dotnet: 8.0
     commands:
       - dotnet tool install -g dotnet-reportgenerator-globaltool
-      - export PATH="$PATH:/root/.dotnet/tools"
+      - export PATH="$PATH:$HOME/.dotnet/tools"
 
   pre_build:
-      commands:
-        - echo "Current Directory"
-        - pwd
-        - echo "Listing Files"
-        - find .
-        - cd AgenticPITSTOP
-        - ls -la
-        - dotnet --info
-        - dotnet restore AgenticPitstop.sln --verbosity normal
+    commands:
+      - echo "Current Directory"
+      - pwd
+      - echo "Listing Files"
+      - find . -maxdepth 2 -not -path '*/.git*'
+      - cd AgenticPITSTOP
+      - ls -la
+      - dotnet --info
+      - dotnet restore AgenticPitstop.sln --verbosity normal
 
   build:
     commands:
       - dotnet build AgenticPitstop.sln --configuration Release --no-restore
+      - dotnet test AgenticPitstop.Tests/AgenticPitstop.Tests.csproj --configuration Release --no-build --logger "trx;LogFileName=results.trx" --results-directory "$CODEBUILD_SRC_DIR/TestResults"
 
   post_build:
     commands:
-      - dotnet test AgenticPitstop.Tests/AgenticPitstop.Tests.csproj --logger trx
+      - dotnet publish AgenticPitstop.sln --configuration Release --no-build --output "$CODEBUILD_SRC_DIR/publish"
+
+reports:
+  test-results:
+    files:
+      - 'results.trx'
+    base-directory: TestResults
+    file-format: VisualStudioTrx
 
 artifacts:
   files:
     - '**/*'
+  base-directory: publish
