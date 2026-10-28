@@ -1,18 +1,25 @@
-﻿version: 0.0
-
+version: 0.0
 os: linux
 
 files:
-  - source: /
-    destination: /var/www/pitstop
+  - source: app
+    destination: /var/www/agenticpitstop
+    overwrite: true
 
 hooks:
-
-  BeforeInstall:
-    - location: scripts/install_dependencies.sh
-
-  ApplicationStart:
-    - location: scripts/start_server.sh
-
   ApplicationStop:
-    - location: scripts/stop_server.sh
+    - location: scripts/stop.sh
+      timeout: 60
+      runas: root
+  BeforeInstall:
+    - location: scripts/before_install.sh
+      timeout: 120
+      runas: root
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 60
+      runas: root
+  ValidateService:
+    - location: scripts/validate.sh
+      timeout: 60
+      runas: root
