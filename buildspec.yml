@@ -31,6 +31,7 @@ phases:
   build:
     commands:
       - dotnet build "$SLN_PATH" --configuration $BUILD_CONFIGURATION --no-restore
+      -  mkdir -p "$CODEBUILD_SRC_DIR/TestResults"
       - >
         dotnet test "$SLN_PATH"
         --configuration $BUILD_CONFIGURATION
