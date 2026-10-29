@@ -74,8 +74,8 @@ reports:
     file-format: VisualStudioTrx
   code-coverage:
     files:
-      - 'Cobertura.xml'
-    base-directory: CoverageReport
+      - '**/coverage.cobertura.xml'
+    base-directory: TestResults
     file-format: CoberturaXml
 
 artifacts:

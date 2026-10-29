@@ -5,24 +5,7 @@ VisualStudioVersion = 17.14.37806.7 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgenticPitstop", "AgenticPitstop.csproj", "{FB24E551-CBBB-6987-BE82-39FF25D5FFB2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AgenticPitstop.Tests", "AgenticPitstop.Tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{12784B6D-146E-4D19-B21E-D3D3E9041328}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{C70909DF-FEF8-4818-80C5-91368D1EEE75}"
-	ProjectSection(SolutionItems) = preProject
-		HomeControllerTests.cs = HomeControllerTests.cs
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{2EFC6845-19AF-47D4-916A-67D95A3B104D}"
-	ProjectSection(SolutionItems) = preProject
-		HealthControllerTests.cs = HealthControllerTests.cs
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SmokeTests", "SmokeTests", "{86198F9B-6ED6-4490-B5F8-1CADAB15B437}"
-	ProjectSection(SolutionItems) = preProject
-		SmokeTests.cs = SmokeTests.cs
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgenticPitstop.Tests", "..\AgenticPitstop.Tests\AgenticPitstop.Tests.csproj", "{88C37CC3-6E9A-4606-B3CE-C1B5162AC04D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,15 +17,13 @@ Global
 		{FB24E551-CBBB-6987-BE82-39FF25D5FFB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB24E551-CBBB-6987-BE82-39FF25D5FFB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB24E551-CBBB-6987-BE82-39FF25D5FFB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88C37CC3-6E9A-4606-B3CE-C1B5162AC04D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88C37CC3-6E9A-4606-B3CE-C1B5162AC04D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88C37CC3-6E9A-4606-B3CE-C1B5162AC04D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88C37CC3-6E9A-4606-B3CE-C1B5162AC04D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{12784B6D-146E-4D19-B21E-D3D3E9041328} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{C70909DF-FEF8-4818-80C5-91368D1EEE75} = {12784B6D-146E-4D19-B21E-D3D3E9041328}
-		{2EFC6845-19AF-47D4-916A-67D95A3B104D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{86198F9B-6ED6-4490-B5F8-1CADAB15B437} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84353D54-89D9-4571-99E8-59517CD6579D}
